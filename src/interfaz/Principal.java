@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package interfaz;
+
+import clases.Fraccionario;
 
 /**
  *
@@ -30,16 +31,16 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtDenominador = new javax.swing.JTextField();
-        txtNumerador = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        cmbOperaciones = new javax.swing.JComboBox();
         txtDenominador1 = new javax.swing.JTextField();
         txtNumerador1 = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        cmbOperaciones = new javax.swing.JComboBox();
         txtDenominador2 = new javax.swing.JTextField();
         txtNumerador2 = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        txtDenominador3 = new javax.swing.JTextField();
+        txtNumerador3 = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         cmdCalcular = new javax.swing.JButton();
         cmdBorrar = new javax.swing.JButton();
@@ -51,26 +52,40 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Traditional Arabic", 3, 18)); // NOI18N
         jLabel1.setText("Operaciones Con Fraccionarios");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
-        jPanel1.add(txtDenominador, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 40, 30));
-        jPanel1.add(txtNumerador, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 40, 30));
+        jPanel1.add(txtDenominador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 40, 30));
+        jPanel1.add(txtNumerador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 40, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 60, 10));
 
         cmbOperaciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Suma", "Resta", "Multiplicacion", "Division" }));
         jPanel1.add(cmbOperaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
-        jPanel1.add(txtDenominador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 40, 30));
-        jPanel1.add(txtNumerador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 40, 30));
+        jPanel1.add(txtDenominador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 40, 30));
+        jPanel1.add(txtNumerador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 40, 30));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 60, 10));
 
         jLabel2.setText("=");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
-        jPanel1.add(txtDenominador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 40, 30));
-        jPanel1.add(txtNumerador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 40, 30));
+
+        txtDenominador3.setEditable(false);
+        jPanel1.add(txtDenominador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 40, 30));
+
+        txtNumerador3.setEditable(false);
+        jPanel1.add(txtNumerador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 40, 30));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 60, 10));
 
         cmdCalcular.setText("Calcular");
+        cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCalcularActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 70, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -87,6 +102,46 @@ public class Principal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
+        int op, n1, n2, d1, d2;
+        Fraccionario f1, f2, f3 = null;
+
+        op = cmbOperaciones.getSelectedIndex();
+
+        n1 = Integer.parseInt((txtNumerador1).getText());
+        d1 = Integer.parseInt((txtDenominador1).getText());
+        n2 = Integer.parseInt((txtNumerador2).getText());
+        d2 = Integer.parseInt((txtDenominador2).getText());
+
+        f1 = new Fraccionario(n1, d1);
+        f2 = new Fraccionario(n2, d2);
+
+        switch (op) {
+            case 0:
+                f3 = f1.sumar(f2);
+
+                break;
+
+            case 1:
+                f3 = f1.restar(f2);
+                break;
+        }
+        txtNumerador3.setText("" + f3.getNumerador());
+        txtDenominador3.setText("" + f3.getDenominador());
+
+    }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        txtNumerador1.setText("");
+        txtNumerador2.setText("");
+        txtNumerador3.setText("");
+        txtDenominador1.setText("");
+        txtDenominador2.setText("");
+        txtDenominador3.setText("");
+        txtNumerador1.requestFocusInWindow();
+        cmbOperaciones.setSelectedIndex(0);
+    }//GEN-LAST:event_cmdBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,11 +188,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField txtDenominador;
     private javax.swing.JTextField txtDenominador1;
     private javax.swing.JTextField txtDenominador2;
-    private javax.swing.JTextField txtNumerador;
+    private javax.swing.JTextField txtDenominador3;
     private javax.swing.JTextField txtNumerador1;
     private javax.swing.JTextField txtNumerador2;
+    private javax.swing.JTextField txtNumerador3;
     // End of variables declaration//GEN-END:variables
 }
